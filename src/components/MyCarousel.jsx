@@ -14,8 +14,6 @@ const Berita = () => {
     AOS.init();
   }, []);
   const responsive = {
-    // DIDADEJAN
-    // DIDADEJAN
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1310 },
       items: 3,

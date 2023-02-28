@@ -82,7 +82,7 @@ export default function Navbar() {
                   onMouseLeave={() => setIsOpen1(false)}
                 >
                   <button className="ml-2 flex items-center text-[20px] font-medium">
-                    Agenda
+                    Agendaa
                     <i className="text-lg leading-lg">
                       <svg
                         width="35px"

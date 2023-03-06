@@ -1,29 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import Modal from "./Modal";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../index.css";
-import "../CarouselButton.css";
+import "../carouselButton.css";
 import figma from "../assets/figma.png";
 import resesi from "../assets/resesi.png";
 import iphone from "../assets/iphone.png";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
-const Berita = () => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
+function Berita() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+  }
+
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 1310 },
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 1366 },
       items: 3,
     },
     desktop: {
-      breakpoint: { max: 1310, min: 1115 },
-      items: 2,
+      breakpoint: { max: 1366, min: 1030 },
+      items: 3,
     },
     tablet: {
-      breakpoint: { max: 1115, min: 464 },
+      breakpoint: { max: 1030, min: 464 },
       items: 2,
     },
     mobile: {
@@ -35,33 +43,31 @@ const Berita = () => {
     // ======================================
     // ==============Dekstop=================
     // ======================================
-    <div className="container mx-auto">
+    <div className="container mx-auto ">
       <div className="hidden md:block">
         <div className="flex justify-center">
-          <div
-            className="flex border-2 border-[#020181] lg:w-[80vw] pl-[50px] h-[540px] md:w-[760px] my-[40px] bg-[#020181] rounded-[12px] flex-col"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-once="true"
-          >
+          <div className="flex border-2 border-[#020181] lg:w-[1300px] pl-[50px] h-[521px] md:w-[760px] my-[12px] bg-[#020181] rounded-[12px] flex-col">
             <h2 className="text-[32px] font-[400px] m-[26px] pl-[10px] text-white py-2">
               News
             </h2>
             {/* Carousel */}
-            <div>
+            <div className="">
               <div>
-                <Carousel responsive={responsive} className="mx-[5vw]">
+                <Carousel responsive={responsive} className="mx-[110px]">
                   {/* slide 1 */}
-                  <div className="group w-[19vw]">
-                    <div className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px] group-hover:cursor-pointer duration-100 group-hover:bg-slate-200">
+                  <div>
+                    <div
+                      onClick={openModal}
+                      className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]"
+                    >
                       <div className="w-auto h-[220px] rounded-t-[9px] text-center">
                         <img
                           src={figma}
                           alt=""
-                          className="rounded-t-[0.64rem] h-full group-hover:opacity-90"
+                          className="rounded-t-md h-full"
                         />
                       </div>
-                      <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px]">
+                      <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
                         <h1 className="text-[25px]">Figma</h1>
                         <div className="flex items-center gap-2 animate-pulse">
                           <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
@@ -75,89 +81,122 @@ const Berita = () => {
                         </p>
                       </div>
                     </div>
+                    <Modal isOpen={isModalOpen} closeModal={closeModal}>
+                      <p>
+                        Berikut beberapa contoh algoritma kriptografi modern
+                        yang saat ini banyak digunakan: Advanced Encryption
+                        Standard (AES) - merupakan algoritma kriptografi
+                        simetris yang digunakan untuk mengenkripsi data dalam
+                        berbagai aplikasi seperti protokol keamanan internet,
+                        penyimpanan data, dan komunikasi data. AES diadopsi oleh
+                        pemerintah Amerika Serikat dan dianggap sebagai salah
+                        satu algoritma kriptografi yang paling aman dan efisien.
+                        Rivest-Shamir-Adleman (RSA) - merupakan algoritma
+                        kriptografi asimetris yang digunakan untuk mengenkripsi
+                        dan mendekripsi pesan menggunakan pasangan kunci publik
+                        dan kunci privat. RSA banyak digunakan dalam protokol
+                        keamanan internet seperti SSL/TLS, serta dalam
+                        implementasi sistem elektronik pembayaran. Elliptic
+                        Curve Cryptography (ECC) - merupakan algoritma
+                        kriptografi asimetris yang menggunakan kurva eliptik
+                        untuk menghasilkan pasangan kunci publik dan kunci
+                        privat. ECC dianggap lebih aman dan efisien dibandingkan
+                        dengan algoritma RSA, dan banyak digunakan dalam
+                        aplikasi seperti perbankan, sertifikat digital, dan
+                        keamanan nirkabel. Blowfish - merupakan algoritma
+                        kriptografi simetris yang digunakan untuk mengenkripsi
+                        data pada jaringan komputer dan sistem penyimpanan data.
+                        Blowfish dianggap lebih aman dan cepat dibandingkan
+                        dengan algoritma simetris lain seperti DES, dan
+                        digunakan dalam berbagai aplikasi seperti sistem
+                        manajemen database, sistem operasi, dan game online.
+                        Twofish - merupakan algoritma kriptografi simetris yang
+                        dikembangkan sebagai pengganti Blowfish yang lebih aman
+                        dan efisien. Twofish digunakan dalam berbagai aplikasi
+                        seperti sistem manajemen database, sistem operasi, dan
+                        protokol keamanan internet seperti SSH.
+                      </p>
+                    </Modal>
                   </div>
+
                   {/* slide 2 */}
-                  <div className="group">
-                    <div className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px] group-hover:cursor-pointer duration-100 group-hover:bg-slate-200">
-                      <div className="w-auto h-[220px] rounded-t-[9px] text-center">
-                        <img
-                          src={resesi}
-                          alt=""
-                          className="rounded-t-md h-full group-hover:opacity-90"
-                        />
+                  <div className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]">
+                    <div className="w-auto h-[220px] rounded-t-[9px] text-center">
+                      <img
+                        src={resesi}
+                        alt=""
+                        className="rounded-t-md h-full"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
+                      <h1 className="text-[25px]">Resesi 2023</h1>
+                      <div className="flex items-center gap-2 animate-pulse">
+                        <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
+                        <span className="text-[12px] text-red-500">
+                          7 hari yang lalu
+                        </span>
                       </div>
-                      <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
-                        <h1 className="text-[25px]">Resesi 2023</h1>
-                        <div className="flex items-center gap-2 animate-pulse">
-                          <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
-                          <span className="text-[12px] text-red-500">
-                            7 hari yang lalu
-                          </span>
-                        </div>
-                        <p className="text-[13px]">
-                          Menginjak awal tahun 2023 dengan resesi global
-                        </p>
-                      </div>
+                      <p className="text-[13px]">
+                        Menginjak awal tahun 2023 dengan resesi global
+                      </p>
                     </div>
                   </div>
 
                   {/* slide 3 */}
-                  <div className="group">
-                    <div
-                      className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]
-                    group-hover:cursor-pointer duration-100 group-hover:bg-slate-200"
-                    >
-                      <div className="w-auto h-[220px] rounded-t-[9px] text-center">
-                        <img
-                          src={iphone}
-                          alt=""
-                          className="rounded-t-md w-full h-full group-hover:opacity-90"
-                        />
+                  <div className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]">
+                    <div className="w-auto h-[220px] rounded-t-[9px] text-center">
+                      <img
+                        src={iphone}
+                        alt=""
+                        className="rounded-t-md w-full h-full"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
+                      <h1 className="text-[25px]">Resesi 2023</h1>
+                      <div className="flex items-center gap-2 animate-pulse">
+                        <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
+                        <span className="text-[12px] text-red-500">
+                          7 hari yang lalu
+                        </span>
                       </div>
-                      <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
-                        <h1 className="text-[25px] pt-5 pb-1">
-                          Apple buka pabrik di China
-                        </h1>
-                        <div className="flex items-center gap-2 animate-pulse">
-                          <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
-                          <span className="text-[12px] text-red-500">
-                            15 hari yang lalu
-                          </span>
-                        </div>
-                        <p className="text-[13px]">
-                          Strategi Apple buka pabrik di China menjadi sorotan
-                        </p>
+                      <p className="text-[13px]">
+                        Menginjak awal tahun 2023 dengan resesi global
+                      </p>
+                    </div>
+                  </div>
+                  {/* slide 4 */}
+                  <div className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]">
+                    <div className="w-auto h-[200px] bg-black rounded-t-[9px] text-center"></div>
+                    <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
+                      <h1 className="text-[25px]">Figma</h1>
+                      <div className="flex items-center gap-2 animate-pulse">
+                        <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
+                        <span className="text-[12px] text-red-500">
+                          5 hari yang lalu
+                        </span>
                       </div>
+                      <p className="text-[13px]">
+                        Figma menjadi website desain terbaik bagi para desainer
+                        web dan mobile
+                      </p>
                     </div>
                   </div>
 
-                  {/* slide 4 */}
-                  <div className="group">
-                    <div
-                      className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]
-                    group-hover:cursor-pointer duration-100 group-hover:bg-slate-200"
-                    >
-                      <div className="w-auto h-[220px] rounded-t-[9px] text-center">
-                        <img
-                          src={iphone}
-                          alt=""
-                          className="rounded-t-md w-full h-full group-hover:opacity-90"
-                        />
+                  {/* slide 5 */}
+                  <div className="flex flex-col w-[261px] h-[378px] font-semibold bg-white rounded-[11px]">
+                    <div className="w-auto h-[200px] bg-black rounded-t-[9px] text-center"></div>
+                    <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
+                      <h1 className="text-[25px]">Figma</h1>
+                      <div className="flex items-center gap-2 animate-pulse">
+                        <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
+                        <span className="text-[12px] text-red-500">
+                          5 hari yang lalu
+                        </span>
                       </div>
-                      <div className="flex flex-col justify-evenly ml-[20px] mt-[2px] h-[126px] w-[200px] ">
-                        <h1 className="text-[25px] pt-5 pb-1">
-                          Apple buka pabrik di China
-                        </h1>
-                        <div className="flex items-center gap-2 animate-pulse">
-                          <div className="bg-red-500 w-[10px] rounded-full h-[10px]"></div>
-                          <span className="text-[12px] text-red-500">
-                            15 hari yang lalu
-                          </span>
-                        </div>
-                        <p className="text-[13px]">
-                          Strategi Apple buka pabrik di China menjadi sorotan
-                        </p>
-                      </div>
+                      <p className="text-[13px]">
+                        Figma menjadi website desain terbaik bagi para desainer
+                        web dan mobile
+                      </p>
                     </div>
                   </div>
                 </Carousel>
@@ -171,90 +210,32 @@ const Berita = () => {
       ===================================== */}
       <div className="md:hidden max-[200px]:hidden">
         <div className="flex justify-center">
-          <div
-            className="flex border-2 border-[#020181] w-[252px] sm:w-[385px] h-[1040px] sm:h-[1348px] my-[60px] bg-[#020181] rounded-[12px] flex-col"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-once="true"
-          >
-            <h2 className="text-[24px] sm:text-[30px] text-white m-[20px] pl-[6px] sm:pl-[22px] font-[400px]">
-              News
-            </h2>
-            <div className="pl-[20px] sm:pl-[66px] pt-[10px]">
-              {/* Slide 1 */}
-              <div className="group w-[19vw]">
-                <div className="flex flex-col w-[210px] h-[260px] sm:w-[261px] sm:h-[358px] font-semibold bg-white rounded-[0.64rem] group-hover:cursor-pointer duration-100 group-hover:bg-slate-200">
-                  <div className="w-auto h-[200px] rounded-t-[0.64rem] text-center">
-                    <img
-                      src={figma}
-                      alt=""
-                      className="rounded-t-[0.58rem] h-full group-hover:opacity-90"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-evenly ml-[20px] h-[126px] w-[200px]">
-                    <h1 className="text-[16px] sm:text-[25px]">Figma</h1>
-                    <div className="flex items-center gap-1 sm:gap-2 animate-pulse">
-                      <div className="bg-red-500 w-[7px] sm:w-[10px] rounded-full h-[7px] sm:h-[10px]"></div>
-                      <span className="text-[9px] sm:text-[12px] text-red-500">
-                        5 hari yang lalu
-                      </span>
-                    </div>
-                    <p className="text-[10px] sm:text-[13px] w-[180px]">
-                      Figma menjadi website desain terbaik bagi para desainer
-                      web dan mobile
-                    </p>
-                  </div>
-                </div>
+          <div className="flex border-2 border-[#020181] w-[290px] h-[975px] my-[60px] bg-[#020181] text-white rounded-[12px] flex-col">
+            <h2 className="text-[20px] font-[400px] m-[20px] pl-[5px]">News</h2>
+            <div className="pl-[40px] pt-[20px]">
+              <div className="flex flex-col w-[216px] h-[250px] justify-between">
+                <div className="w-[212px] h-[133.56px] bg-[#D9D9D9] rounded-[9px]"></div>
+                <h1 className="text-[22px]">Judul untuk Berita</h1>
+                <span className="text-[12px]">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime excepturi vero dolore!
+                </span>
               </div>
-              {/* Slide 2 */}
-              <div className="group w-[19vw] mt-[30px]">
-                <div className="flex flex-col w-[210px] h-[260px] sm:w-[261px] sm:h-[358px] font-semibold bg-white rounded-[0.64rem] group-hover:cursor-pointer duration-100 group-hover:bg-slate-200">
-                  <div className="w-auto h-[200px] rounded-t-[0.64rem] text-center">
-                    <img
-                      src={resesi}
-                      alt=""
-                      className="rounded-t-[0.58rem] h-full group-hover:opacity-90"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-evenly ml-[20px] h-[126px] w-[200px]">
-                    <h1 className="text-[16px] sm:text-[25px]">Resesi 2023</h1>
-                    <div className="flex items-center gap-1 sm:gap-2 animate-pulse">
-                      <div className="bg-red-500 w-[7px] sm:w-[10px] rounded-full h-[7px] sm:h-[10px]"></div>
-                      <span className="text-[9px] sm:text-[12px] text-red-500">
-                        7 hari yang lalu
-                      </span>
-                    </div>
-                    <p className="text-[10px] sm:text-[13px] w-[180px]">
-                      Menginjak awal tahun 2023 dengan resesi global
-                    </p>
-                  </div>
-                </div>
+              <div className="flex flex-col w-[216px] h-[250px] justify-between mt-[50px]">
+                <div className="w-[212px] h-[133.56px] bg-[#D9D9D9] rounded-[9px] text-center"></div>
+                <h1 className="text-[22px]">Judul untuk Berita</h1>
+                <span className="text-[12px]">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime excepturi vero dolore!
+                </span>
               </div>
-              {/* Slide 3 */}
-              <div className="group w-[19vw] mt-[30px]">
-                <div className="flex flex-col w-[210px] h-[340px] sm:w-[261px] sm:h-[427px] font-semibold bg-white rounded-[0.64rem] group-hover:cursor-pointer duration-100 group-hover:bg-slate-200">
-                  <div className="w-auto h-[268px] rounded-t-[0.64rem] text-center">
-                    <img
-                      src={iphone}
-                      alt=""
-                      className="rounded-t-[0.58rem] h-full group-hover:opacity-90"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-evenly ml-[20px] h-[156px] w-[200px]">
-                    <h1 className="text-[16px] sm:text-[18px] w-[150px]">
-                      Apple buka pabrik di China
-                    </h1>
-                    <div className="flex items-center gap-1 sm:gap-2 animate-pulse">
-                      <div className="bg-red-500 w-[7px] sm:w-[10px] rounded-full h-[7px] sm:h-[10px]"></div>
-                      <span className="text-[9px] sm:text-[12px] text-red-500">
-                        14 hari yang lalu
-                      </span>
-                    </div>
-                    <p className="text-[10px] sm:text-[13px] w-[180px]">
-                      Strategi Apple buka pabrik di China menjadi sorotan
-                    </p>
-                  </div>
-                </div>
+              <div className="flex flex-col w-[216px] h-[250px] justify-between mt-[50px]">
+                <div className="w-[212px] h-[133.56px] bg-[#D9D9D9] rounded-[9px] text-center"></div>
+                <h1 className="text-[22px]">Judul untuk Berita</h1>
+                <span className="text-[12px]">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime excepturi vero dolore!
+                </span>
               </div>
             </div>
           </div>
@@ -262,6 +243,6 @@ const Berita = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Berita;
